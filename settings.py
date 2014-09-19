@@ -11,6 +11,9 @@ fabfile = {'example-fabfile': './fabfile.py'}
 # Change this...
 secret_key = 'secret_key'
 
+# default password for hosts
+password = 'atrallum.fab'
+
 # IP that the fabric-web flask server should listen on
 listen_ip = '127.0.0.1'
 # PORT that the fabric-web flask server should listen on
@@ -24,6 +27,9 @@ show_hostname_field = True
 
 # show task code in execute form
 show_task_code_in_execution_form = True
+
+# show password in task form
+show_task_password = True
 
 # Grab you local settings, without messing up the git_commit
 try:
