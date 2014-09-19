@@ -59,7 +59,7 @@ def task_display(fabfile, task_name):
                   )
 
 
-def execute_task(task, hosts, roles, *args, **kwargs):
+def execute_task(task, hosts, roles, password=False, *args, **kwargs):
     """ Execute a task, providing all the details from the form. """
     from fabric.api import env, execute
     from StringIO import StringIO
@@ -67,6 +67,8 @@ def execute_task(task, hosts, roles, *args, **kwargs):
 
     env.hosts = hosts
     env.roles = roles
+    if password:
+        env.password = password
 
     output = StringIO()
     error = StringIO()
@@ -133,6 +135,14 @@ def task_execute(fabfile, task_name):
     if ' ' in roles:
         roles = roles.split()
 
+    password = False
+    if settings.password:
+        password = settings.password
+    if 'password_hosts' in form:
+        password = request.form['password_hosts']
+        del form['password_hosts']
+
+
     if not hosts and not roles:
         flash('You need to provide either a hostname or choose a role.')
         return redirect("/fabfile/%(fabfile)s/task/%(task_name)s" % locals())
@@ -153,9 +163,11 @@ def task_execute(fabfile, task_name):
     if missing_required_args:
         return redirect("/fabfile/%(fabfile)s/task/%(task_name)s" % locals())
 
+
     stdout, stderr = execute_task(task,
                                   hosts=hosts,
                                   roles=roles,
+                                  password=password,
                                   **filtered_form
                                   )
 
