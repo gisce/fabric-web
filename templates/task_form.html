@@ -72,6 +72,15 @@
         </div>
 	{% endif %}
 
+    {% if settings.show_task_password %}
+    <div class="control-group">
+            <label class="control-label" for="password_hosts">password</label>
+            <div class="controls">
+		    <input type="password" name='password_hosts' id="password_hosts" >
+            </div>
+        </div>
+	{% endif %}
+
     {% if settings.show_task_code_in_execution_form %}
     <h3>Just so you know...</h3>
     <p>This is the code that your will be executing on the remote system.</p>
