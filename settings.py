@@ -5,14 +5,16 @@
 #   'packages': './fabfile-packages.py'
 #   }
 #
-fabfile = {'example-fabfile': './fabfile.py'}
+fabfile = {
+    'example-fabfile': './fabfile.py'
+}
 
 # default secert key that is used for flash
 # Change this...
 secret_key = 'secret_key'
 
 # default password for hosts
-password = 'atrallum.fab'
+password = 'password'
 
 # IP that the fabric-web flask server should listen on
 listen_ip = '127.0.0.1'
